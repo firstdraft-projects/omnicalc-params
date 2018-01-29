@@ -1,54 +1,54 @@
 require "rails_helper"
 
-feature "Flexible square" do
-  it "works with input 5", points: 2, hint: h("params_are_strings") do
+describe "/flexible/square/[NUMBER TO BE SQUARED]" do
+  it "squares number with input 5", points: 2, hint: h("params_are_strings") do
     visit "/flexible/square/5"
 
     expect(page).to have_content(25)
   end
 end
 
-feature "Flexible square" do
-  it "works with input 42", points: 4, hint: h("params_are_strings") do
+describe "/flexible/square/[NUMBER TO BE SQUARED]" do
+  it "squares number with input 42", points: 4, hint: h("params_are_strings") do
     visit "/flexible/square/42"
 
     expect(page).to have_content(1764)
   end
 end
 
-feature "Flexible square root" do
-  it "works with input 5", points: 2, hint: h("params_are_strings") do
+describe "/flexible/square_root/[NUMBER TO FIND THE SQUARE ROOT OF]" do
+  it "calculates the square root of number with input 5", points: 2, hint: h("params_are_strings") do
     visit "/flexible/square_root/5"
 
     expect(page).to have_content(2.236)
   end
 end
 
-feature "Flexible square root" do
-  it "works with input 42", points: 2, hint: h("params_are_strings") do
+describe "/flexible/square_root/[NUMBER TO FIND THE SQUARE ROOT OF]" do
+  it "calculates the square root of number with input 42", points: 2, hint: h("params_are_strings") do
     visit "/flexible/square_root/42"
 
     expect(page).to have_content(6.4807)
   end
 end
 
-feature "Flexible payment" do
-  it "works", points: 5, hint: h("params_are_strings") do
+describe "/flexible/payment/[BASIS POINTS]/[NUMBER OF YEARS]/[PRINCIPAL]" do
+  it "calculates the loan payment", points: 5, hint: h("params_are_strings") do
     visit "/flexible/payment/324/5/14600"
 
     expect(page).to have_content(263.90)
   end
 end
 
-feature "Flexible payment" do
-  it "rounds the payment", points: 1, hint: h("round") do
+describe "/flexible/payment/[BASIS POINTS]/[NUMBER OF YEARS]/[PRINCIPAL]" do
+  it "rounds the loan payment", points: 1, hint: h("round") do
     visit "/flexible/payment/324/5/14503"
 
     expect(page).to have_content(262.15)
   end
 end
 
-feature "Flexible payment" do
+describe "/flexible/payment/[BASIS POINTS]/[NUMBER OF YEARS]/[PRINCIPAL]" do
   it "formats large dollar amounts", points: 2, hint: h("number_to_currency") do
     visit "/flexible/payment/410/30/250000"
 
@@ -56,7 +56,7 @@ feature "Flexible payment" do
   end
 end
 
-feature "Flexible payment" do
+describe "/flexible/payment/[BASIS POINTS]/[NUMBER OF YEARS]/[PRINCIPAL]" do
   it "formats the rate as a percentage", points: 1, hint: h("number_to_percentage") do
     visit "/flexible/payment/410/30/250000"
 
@@ -64,7 +64,28 @@ feature "Flexible payment" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/flexible/random/[MINIMUM]/[MAXIMUM]" do
+  it "creates an appropriately constrained random number", points: 1, hint: h("exclusive_random_numbers") do
+    visit "/flexible/random/1/10"
+
+    reg_exp = /A random number between 1 and 10 is (\d+)/
+    matched_groups = reg_exp.match(page.text)
+    first_matched_number = matched_groups[1].to_i
+    expect(first_matched_number).to be > 1
+  end
+end
+
+describe "/flexible/random/[MINIMUM]/[MAXIMUM]" do
+  it "will not work for two consecutive numbers", points: 1, hint: h("exclusive_random_numbers") do
+    visit "/flexible/random/1/2"
+
+    reg_exp = /A random number between 1 and 2 is (\d+)/
+    matched_groups = reg_exp.match(page.text)
+    expect(matched_groups).to be nil
+  end
+end
+
+describe "/square/new" do
   it "has a form element", points: 1 do
     visit "/square/new"
 
@@ -72,7 +93,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/square/new" do
   it "has a label", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/square/new"
 
@@ -80,7 +101,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/square/new" do
   it "has an input", points: 1 do
     visit "/square/new"
 
@@ -88,7 +109,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/square/new" do
   it "has a button", points: 1, hint: h("copy_must_match") do
     visit "/square/new"
 
@@ -96,7 +117,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/square/new" do
   it "has an action attribute", points: 1 do
     visit "/square/new"
 
@@ -104,7 +125,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/square/new" do
   it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
     visit "/square/new"
 
@@ -114,7 +135,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "First RCAV for square form" do
+describe "/square/new" do
   it "captures the user's input in the query string", points: 4, hint: h("names_for_inputs") do
     visit "/square/new"
 
@@ -122,7 +143,7 @@ feature "First RCAV for square form" do
   end
 end
 
-feature "Second RCAV for square form" do
+describe "/square/new" do
   it "correctly processes an input of 5", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square/new"
 
@@ -134,7 +155,7 @@ feature "Second RCAV for square form" do
   end
 end
 
-feature "Second RCAV for square form" do
+describe "/square/new" do
   it "correctly processes an input of 42.42", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square/new"
 
@@ -146,7 +167,7 @@ feature "Second RCAV for square form" do
   end
 end
 
-feature "First RCAV for square root form" do
+describe "/square_root/new" do
   it "has a form element", points: 1 do
     visit "/square_root/new"
 
@@ -154,7 +175,7 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "First RCAV for square root form" do
+describe "/square_root/new" do
   it "has a label", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/square_root/new"
 
@@ -162,7 +183,7 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "First RCAV for square root form" do
+describe "/square_root/new" do
   it "has an input", points: 1, hint: h("label_for_input") do
     visit "/square_root/new"
 
@@ -170,7 +191,7 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "First RCAV for square root form" do
+describe "/square_root/new" do
   it "has a button", points: 1, hint: h("copy_must_match") do
     visit "/square_root/new"
 
@@ -178,7 +199,7 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "First RCAV for square root form" do
+describe "/square_root/new" do
   it "has an action attribute", points: 1 do
     visit "/square_root/new"
 
@@ -186,8 +207,8 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "First RCAV for square root form" do
-  it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
+describe "/square_root/new" do
+  it "leads to another functional RCAV when submitted ", points: 6, hint: h("button_type") do
     visit "/square_root/new"
 
     click_button "Calculate square root"
@@ -196,7 +217,7 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "First RCAV for square root form" do
+describe "/square_root/new" do
   it "captures the user's input in the query string", points: 4, hint: h("names_for_inputs") do
     visit "/square_root/new"
 
@@ -204,7 +225,7 @@ feature "First RCAV for square root form" do
   end
 end
 
-feature "Second RCAV for square root form" do
+describe "/square_root/new" do
   it "correctly processes an input of 5", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square_root/new"
 
@@ -216,7 +237,7 @@ feature "Second RCAV for square root form" do
   end
 end
 
-feature "Second RCAV for square root form" do
+describe "/square_root/new" do
   it "correctly processes an input of 42.42", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square_root/new"
 
@@ -228,7 +249,7 @@ feature "Second RCAV for square root form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has a form element", points: 1 do
     visit "/payment/new"
 
@@ -236,7 +257,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has a label for APR", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/payment/new"
 
@@ -244,7 +265,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has a label for number of years", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/payment/new"
 
@@ -252,7 +273,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has a label for principal", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/payment/new"
 
@@ -260,7 +281,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has three inputs", points: 1, hint: h("label_for_input") do
     visit "/payment/new"
 
@@ -268,7 +289,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has a button", points: 1, hint: h("copy_must_match") do
     visit "/payment/new"
 
@@ -276,7 +297,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "has an action attribute", points: 2 do
     visit "/payment/new"
 
@@ -284,7 +305,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
     visit "/payment/new"
 
@@ -294,7 +315,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "First RCAV for payment form" do
+describe "/payment/new" do
   it "captures the user's input in the query string", points: 4, hint: h("names_for_inputs") do
     visit "/payment/new"
 
@@ -302,7 +323,7 @@ feature "First RCAV for payment form" do
   end
 end
 
-feature "Second RCAV for payment form" do
+describe "/payment/new" do
   it "correctly processes inputs", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/payment/new"
 
@@ -316,7 +337,7 @@ feature "Second RCAV for payment form" do
   end
 end
 
-feature "Second RCAV for payment form" do
+describe "/payment/new" do
   it "rounds the payment", points: 1, hint: h("round") do
     visit "/payment/new"
 
@@ -330,7 +351,7 @@ feature "Second RCAV for payment form" do
   end
 end
 
-feature "Second RCAV for payment form" do
+describe "/payment/new" do
   it "formats large dollar amounts", points: 2, hint: h("number_to_currency") do
     visit "/payment/new"
 
@@ -344,7 +365,7 @@ feature "Second RCAV for payment form" do
   end
 end
 
-feature "Second RCAV for payment form" do
+describe "/payment/new" do
   it "rounds the interest rate to four digits", points: 1, hint: h("round") do
     visit "/payment/new"
 
@@ -358,7 +379,7 @@ feature "Second RCAV for payment form" do
   end
 end
 
-feature "Second RCAV for payment form" do
+describe "/payment/new" do
   it "formats the rate as a percentage", points: 1, hint: h("number_to_percentage") do
     visit "/payment/new"
 
@@ -372,7 +393,7 @@ feature "Second RCAV for payment form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "has a form element", points: 1 do
     visit "/random/new"
 
@@ -380,7 +401,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "has a label for minimum", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/random/new"
 
@@ -388,7 +409,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "has a label for maximum", points: 1, hint: h("copy_must_match label_for_input") do
     visit "/random/new"
 
@@ -396,7 +417,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "has two inputs", points: 1, hint: h("label_for_input") do
     visit "/random/new"
 
@@ -404,7 +425,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "has a button", points: 1, hint: h("copy_must_match") do
     visit "/random/new"
 
@@ -412,7 +433,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "has an action attribute", points: 1 do
     visit "/random/new"
 
@@ -420,7 +441,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
     visit "/random/new"
 
@@ -430,7 +451,7 @@ feature "First RCAV for random form" do
   end
 end
 
-feature "First RCAV for random form" do
+describe "/random/new" do
   it "captures the user's input in the query string", points: 4, hint: h("names_for_inputs") do
     visit "/random/new"
 
