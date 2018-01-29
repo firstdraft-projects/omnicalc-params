@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "/flexible/square/[NUMBER TO BE SQUARED]" do
-  it "squares number with input 5", points: 2, hint: h("params_are_strings") do
+  it "works with an input of 5", points: 2, hint: h("params_are_strings") do
     visit "/flexible/square/5"
 
     expect(page).to have_content(25)
@@ -9,7 +9,7 @@ describe "/flexible/square/[NUMBER TO BE SQUARED]" do
 end
 
 describe "/flexible/square/[NUMBER TO BE SQUARED]" do
-  it "squares number with input 42", points: 4, hint: h("params_are_strings") do
+  it "works with an input of 42", points: 4, hint: h("params_are_strings") do
     visit "/flexible/square/42"
 
     expect(page).to have_content(1764)
@@ -17,7 +17,7 @@ describe "/flexible/square/[NUMBER TO BE SQUARED]" do
 end
 
 describe "/flexible/square_root/[NUMBER TO FIND THE SQUARE ROOT OF]" do
-  it "calculates the square root of number with input 5", points: 2, hint: h("params_are_strings") do
+  it "works with an input of 5", points: 2, hint: h("params_are_strings") do
     visit "/flexible/square_root/5"
 
     expect(page).to have_content(2.236)
@@ -25,7 +25,7 @@ describe "/flexible/square_root/[NUMBER TO FIND THE SQUARE ROOT OF]" do
 end
 
 describe "/flexible/square_root/[NUMBER TO FIND THE SQUARE ROOT OF]" do
-  it "calculates the square root of number with input 42", points: 2, hint: h("params_are_strings") do
+  it "works with an input of 42", points: 2, hint: h("params_are_strings") do
     visit "/flexible/square_root/42"
 
     expect(page).to have_content(6.4807)
@@ -65,23 +65,14 @@ describe "/flexible/payment/[BASIS POINTS]/[NUMBER OF YEARS]/[PRINCIPAL]" do
 end
 
 describe "/flexible/random/[MINIMUM]/[MAXIMUM]" do
-  it "creates an appropriately constrained random number", points: 1, hint: h("exclusive_random_numbers") do
+  it "creates a constrained random number", points: 1 do
     visit "/flexible/random/1/10"
 
-    reg_exp = /A random number between 1 and 10 is (\d+)/
-    matched_groups = reg_exp.match(page.text)
+    pattern = /A random number between 1 and 10 is (\d+)/
+    matched_groups = pattern.match(page.text)
     first_matched_number = matched_groups[1].to_i
-    expect(first_matched_number).to be > 1
-  end
-end
-
-describe "/flexible/random/[MINIMUM]/[MAXIMUM]" do
-  it "will not work for two consecutive numbers", points: 1, hint: h("exclusive_random_numbers") do
-    visit "/flexible/random/1/2"
-
-    reg_exp = /A random number between 1 and 2 is (\d+)/
-    matched_groups = reg_exp.match(page.text)
-    expect(matched_groups).to be nil
+    expect(first_matched_number).to be >= 1
+    expect(first_matched_number).to be <= 10
   end
 end
 
@@ -126,7 +117,7 @@ describe "/square/new" do
 end
 
 describe "/square/new" do
-  it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
+  it "leads to another functional RCAV when submitted ", points: 6, hint: h("button_type") do
     visit "/square/new"
 
     click_button "Calculate square"
@@ -144,7 +135,7 @@ describe "/square/new" do
 end
 
 describe "/square/new" do
-  it "correctly processes an input of 5", points: 3, hint: h("label_for_input params_are_strings") do
+  it "works with an input of 5", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square/new"
 
     fill_in "Enter a number", with: 5
@@ -156,7 +147,7 @@ describe "/square/new" do
 end
 
 describe "/square/new" do
-  it "correctly processes an input of 42.42", points: 3, hint: h("label_for_input params_are_strings") do
+  it "works with an input of 42.42", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square/new"
 
     fill_in "Enter a number", with: 42.42
@@ -226,7 +217,7 @@ describe "/square_root/new" do
 end
 
 describe "/square_root/new" do
-  it "correctly processes an input of 5", points: 3, hint: h("label_for_input params_are_strings") do
+  it "works with an input of 5", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square_root/new"
 
     fill_in "Enter a number", with: 5
@@ -238,7 +229,7 @@ describe "/square_root/new" do
 end
 
 describe "/square_root/new" do
-  it "correctly processes an input of 42.42", points: 3, hint: h("label_for_input params_are_strings") do
+  it "works with an input of 42.42", points: 3, hint: h("label_for_input params_are_strings") do
     visit "/square_root/new"
 
     fill_in "Enter a number", with: 42.42
@@ -306,7 +297,7 @@ describe "/payment/new" do
 end
 
 describe "/payment/new" do
-  it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
+  it "leads to another functional RCAV when submitted ", points: 6, hint: h("button_type") do
     visit "/payment/new"
 
     click_button "Calculate monthly payment"
@@ -442,7 +433,7 @@ describe "/random/new" do
 end
 
 describe "/random/new" do
-  it "when submitted leads to another functional RCAV", points: 6, hint: h("button_type") do
+  it "leads to another functional RCAV when submitted ", points: 6, hint: h("button_type") do
     visit "/random/new"
 
     click_button "Pick random number"
