@@ -120,6 +120,34 @@ The way it should work is:
     - [Word Count](http://omnicalc-target.herokuapp.com/word_count/new)
     - [Descriptive Statistics](http://omnicalc-target.herokuapp.com/descriptive_statistics/new)
 
+## Part IV: Homework Setup
+
+For our homework, we're going to be exploring a machine learning API marketplace called [Algorithmia](https://algorithmia.com/).
+
+First, visit [Algorithmia](https://algorithmia.com/) and sign up for an account. You'll be able to find your API keys by visiting https://algorithmia.com/users/[your username] or by clicking on the profile icon at the top right and clicking the 'My API Keys' link. You'll need this key to complete the homework exercises below.
+
+We'll also need to make sure your API key stays hidden, in case your project ever gets pushed to Github or another public repository. Unsavory types like to scrape Github for sensitive information like API keys and run up huge bills for compromised users. In this specific case, you didn't have to tie your API key to a credit card, but protecting your API keys is generally good practice.
+
+We've already got the infrastructure for this in place. Our class project apps come bundled with a gem called `dotenv` which lets us store sensitive information just in our local development environment and hide that info from Git so it doesn't get pushed anywhere with our code. The info is stored in a file called `.env` that exists in the root folder of your application. If you open it up, you'll see the following code.
+
+```
+TEST_ENV_VAR="It works!"
+```
+
+This is just a key-value pair that we can access anywhere in our Rails environment using the ENV hash. For example, to access this 'sensitive' info, we can open up Rails console and type in:
+
+```
+ENV['TEST_ENV_VAR']
+```
+
+and we should see output of
+
+```
+"It works!"
+```
+
+You can use this pattern throughout your Rails app to pull up any sensitive info. Practice by using the `.env` file to store your Algorithmia API key. 
+
 ## Stretch Goals
 
  - [Bootstrap it](http://getbootstrap.com/components/#panels) to make it look like [the real Omnicalc](http://omnicalc-target.herokuapp.com/). We've already connected `bootstrap.css` and [Font Awesome](http://fontawesome.io/icons/) for you, so you can just start using them.
