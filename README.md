@@ -120,7 +120,9 @@ The way it should work is:
     - [Word Count](http://omnicalc-target.herokuapp.com/word_count/new)
     - [Descriptive Statistics](http://omnicalc-target.herokuapp.com/descriptive_statistics/new)
 
-## Part IV: Homework Setup
+## Part IV: Homework
+
+### Setup
 
 For our homework, we're going to be exploring a machine learning API marketplace called [Algorithmia](https://algorithmia.com/).
 
@@ -148,10 +150,35 @@ and we should see output of
 
 You can use this pattern throughout your Rails app to pull up any sensitive info. Practice by using the `.env` file to store your actual Algorithmia API key.
 
+### Problem 1 - Auto-tagging
 
-## Part V: Homework 1: Colorize API
+The first service we'll use auto-tags blocks of text.
 
-The first API we'll use is a service that colorizes black and white images.
+Here's how it should work:
+
+- If I visit `/colorize`, I should see a form that has a single textarea element which lets me enter text for tagging. If you'd like an example, you can use this excerpt from the Paul Graham essay, [Do Things That Don't Scale](http://www.paulgraham.com/ds.html):
+
+```
+One of the most common types of advice we give at Y Combinator is to do things that don't scale. A lot of would-be founders believe that startups either take off or don't. You build something, make it available, and if you've made a better mousetrap, people beat a path to your door as promised. Or they don't, in which case the market must not exist.
+```
+- The textarea should have a label of `Text` and the button you click to submit the form should be called `Generate Tags`.
+- When the form is submitted, I should see an unordered list of tags corresponding to the submitted text. If you used the example text, you should see the following tags:
+```
+beat
+case
+door
+exist
+market
+path
+people
+promise
+```
+
+Visit the [AutoTag page](https://algorithmia.com/algorithms/nlp/AutoTag), and follow the instructions at the bottom of the page to integrate the API in your controller. ** You do not need to include the `require 'algorithmia'` statement from the instructions**
+
+### Problem 2 - Colorize Images
+
+The next service we'll use colorizes black and white images.
 
 Here's how it should work:
 
@@ -161,7 +188,10 @@ Here's how it should work:
 
 The API needs a bit of time to do it's work, so expect it to take about 30 seconds or so for the request to complete.
 
-Visit the [Image Colorization API](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization), and follow the instructions at the bottom of the page to integrate the API in your controller. ** You do not need to include the `require 'algorithmia'` statement from the instructions**
+Visit the [Image Colorization page](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization), and follow the instructions at the bottom of the page to integrate the API in your controller.
+
+
+
 
 
 ## Stretch Goals
