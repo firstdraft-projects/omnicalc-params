@@ -124,29 +124,45 @@ The way it should work is:
 
 For our homework, we're going to be exploring a machine learning API marketplace called [Algorithmia](https://algorithmia.com/).
 
-First, visit [Algorithmia](https://algorithmia.com/) and sign up for an account. You'll be able to find your API keys by visiting https://algorithmia.com/users/[your username] or by clicking on the profile icon at the top right and clicking the 'My API Keys' link. You'll need this key to complete the homework exercises below.
+First, visit [Algorithmia](https://algorithmia.com/) and sign up for an account. You'll be able to find your API keys by visiting 'https://algorithmia.com/users/[your username]' or by clicking on the profile icon at the top right and clicking the 'My API Keys' link. You'll need this key to complete the homework exercises below.
 
 We'll also need to make sure your API key stays hidden, in case your project ever gets pushed to Github or another public repository. Unsavory types like to scrape Github for sensitive information like API keys and run up huge bills for compromised users. In this specific case, you didn't have to tie your API key to a credit card, but protecting your API keys is generally good practice.
 
-We've already got the infrastructure for this in place. Our class project apps come bundled with a gem called `dotenv` which lets us store sensitive information just in our local development environment and hide that info from Git so it doesn't get pushed anywhere with our code. The info is stored in a file called `.env` that exists in the root folder of your application. If you open it up, you'll see the following code.
+We've already got the infrastructure for this in place. Our class project apps come bundled with a gem called `dotenv` which lets us store sensitive information just in our local development environment and hide that info from Git so it doesn't get pushed anywhere with our code. The info is stored in a file called `.env` that exists in the root folder of your application. Create a new file at the root directory of your application and call it `.env`. In the file place, the following code:
 
 ```
-TEST_ENV_VAR="It works!"
+ALGORITHMIA_KEY="replace_me_with_your_key"
 ```
 
 This is just a key-value pair that we can access anywhere in our Rails environment using the ENV hash. For example, to access this 'sensitive' info, we can open up Rails console and type in:
 
 ```
-ENV['TEST_ENV_VAR']
+ENV['ALGORITHMIA_KEY']
 ```
 
 and we should see output of
 
 ```
-"It works!"
+"replace_me_with_your_key"
 ```
 
-You can use this pattern throughout your Rails app to pull up any sensitive info. Practice by using the `.env` file to store your Algorithmia API key. 
+You can use this pattern throughout your Rails app to pull up any sensitive info. Practice by using the `.env` file to store your actual Algorithmia API key.
+
+
+## Part V: Homework 1: Colorize API
+
+The first API we'll use is a service that colorizes black and white images.
+
+Here's how it should work:
+
+- If I visit `/colorize`, I should see a form that has a single input which lets me enter the URL of a black and white image. You can use [https://cdn.vox-cdn.com/uploads/chorus_asset/file/4863353/grantpark-1.0.jpg](https://cdn.vox-cdn.com/uploads/chorus_asset/file/4863353/grantpark-1.0.jpg) as an example. The smaller the image, the better. Try not to go beyond 800x800px.
+- The input should have a label of `Image URL` and the button you click to submit the form should be called `Colorize`.
+- When the form is submitted, I should see a colorized version of the original black and white picture
+
+The API needs a bit of time to do it's work, so expect it to take about 30 seconds or so for the request to complete.
+
+Visit the [Image Colorization API](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization), and follow the instructions at the bottom of the page to integrate the API in your controller. ** You do not need to include the `require 'algorithmia'` statement from the instructions**
+
 
 ## Stretch Goals
 
