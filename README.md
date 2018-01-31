@@ -150,13 +150,13 @@ and we should see output of
 
 You can use this pattern throughout your Rails app to pull up any sensitive info. Practice by using the `.env` file to store your actual Algorithmia API key.
 
-### Problem 1 - Auto-tagging
+### Problem 1 - Auto-tag Text
 
 The first service we'll use auto-tags blocks of text.
 
 Here's how it should work:
 
-- If I visit `/colorize`, I should see a form that has a single textarea element which lets me enter text for tagging. If you'd like an example, you can use this excerpt from the Paul Graham essay, [Do Things That Don't Scale](http://www.paulgraham.com/ds.html):
+- If I visit `/text-tag`, I should see a form that has a single textarea element which lets me enter text for tagging. If you'd like an example, you can use this excerpt from the Paul Graham essay, [Do Things That Don't Scale](http://www.paulgraham.com/ds.html):
 
 ```
 One of the most common types of advice we give at Y Combinator is to do things that don't scale. A lot of would-be founders believe that startups either take off or don't. You build something, make it available, and if you've made a better mousetrap, people beat a path to your door as promised. Or they don't, in which case the market must not exist.
@@ -190,8 +190,19 @@ The API needs a bit of time to do it's work, so expect it to take about 30 secon
 
 Visit the [Image Colorization page](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization), and follow the instructions at the bottom of the page to integrate the API in your controller.
 
+### Problem 3 - Auto-tag Images
 
+The next service we'll use tags images.
 
+Here's how it should work:
+
+- If I visit `/image-tag`, I should see a form that has a single input which lets me enter the URL of an image. You can use [http://www.pjproductions.co.uk/blog_images/Chicago-Booth-Group-photo-Pete-Jones.jpg](http://www.pjproductions.co.uk/blog_images/Chicago-Booth-Group-photo-Pete-Jones.jpg) as an example.
+- The input should have a label of `Image URL` and the button you click to submit the form should be called `Colorize`.
+- When the form is submitted, I should see a set of tags inside an unordered list.
+
+The API needs a bit of time to do it's work, so expect it to take about 30 seconds or so for the request to complete.
+
+Visit the [Illustration Tagger page](https://algorithmia.com/algorithms/deeplearning/IllustrationTagger), and follow the instructions at the bottom of the page to integrate the API in your controller.
 
 
 ## Stretch Goals
