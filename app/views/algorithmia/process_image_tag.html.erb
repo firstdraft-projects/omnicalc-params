@@ -1,0 +1,11 @@
+<h1>Colorizer</h1>
+
+<h4>Your original image</h4>
+<div><img src="<%= @original_image_url %>"></div>
+
+<h4>Generated tags for your image</h4>
+<ul>
+<% @tag_hashes.each do |tag_hash| %>
+  <li><%= tag_hash.keys[0] %></li>
+<% end  %>
+</ul>

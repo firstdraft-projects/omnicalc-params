@@ -1,0 +1,11 @@
+<h1>Auto-tagger</h1>
+
+<h4>Your text</h4>
+<p><%= @text %></p>
+
+<h4>Generated tags for your text</h4>
+<ul>
+<% @tags.each do |tag| %>
+  <li><%= tag %></li>
+<% end  %>
+</ul>

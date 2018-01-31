@@ -203,8 +203,3 @@ Here's how it should work:
 The API needs a bit of time to do it's work, so expect it to take about 30 seconds or so for the request to complete.
 
 Visit the [Illustration Tagger page](https://algorithmia.com/algorithms/deeplearning/IllustrationTagger), and follow the instructions at the bottom of the page to integrate the API in your controller.
-
-
-## Stretch Goals
-
- - [Bootstrap it](http://getbootstrap.com/components/#panels) to make it look like [the real Omnicalc](http://omnicalc-target.herokuapp.com/). We've already connected `bootstrap.css` and [Font Awesome](http://fontawesome.io/icons/) for you, so you can just start using them.
