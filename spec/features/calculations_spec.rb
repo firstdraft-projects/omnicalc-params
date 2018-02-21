@@ -65,6 +65,16 @@ describe "/flexible/payment/[BASIS POINTS]/[NUMBER OF YEARS]/[PRINCIPAL]" do
 end
 
 describe "/flexible/random/[MINIMUM]/[MAXIMUM]" do
+  it "contains the correct baseline copy", points: 1 do
+    visit "/flexible/random/1/10"
+
+    pattern = /A random number between 1 and 10 is/
+    matched_groups = pattern.match(page.text)
+    expect(matched_groups).to_not be_nil
+  end
+end
+
+describe "/flexible/random/[MINIMUM]/[MAXIMUM]" do
   it "creates a constrained random number", points: 1 do
     visit "/flexible/random/1/10"
 
